@@ -31,7 +31,7 @@ http://risaiku.net/archives/2832/
 
 ## ライセンス等
 MIT License  
-Copyright 2015, risaiku  
+Copyright 2015-2017, risaiku  
 http://risaiku.net  
 https://github.com/risaiku/dot-matrix.js
 

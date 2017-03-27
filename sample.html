@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>dot-matrix.js sample</title>
+<script src="dot-matrix.js"></script>
+</head>
+<body>
+<div style="display:inline-block;background-color:black;">
+    <div id="container" style="width:450px;height:75px;"></div>
+</div>
+<script>
+(function () {
+    var C = "!\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+ 
+    var dotmatrix = new DotMatrix("container");
+    dotmatrix.draw({
+            value    : C,
+            colorOn  : "Blue",
+            colorOff : "MidnightBlue",
+            digit    : 10
+        });
+ 
+    wk = C;
+
+    setInterval(function(){
+        dotmatrix.changeValue(wk);
+        wk = wk.slice(1);
+        if (wk.length == 0) {
+            wk = "          " + C;
+        }
+    } , 200);
+})();
+</script>
+</body>
+</html>

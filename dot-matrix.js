@@ -1,8 +1,8 @@
 //
 // dot-matrix.js
-// v1.0
+// v1.1
 //
-// Copyright (c) 2015 risaiku
+// Copyright (c) 2015-2017 risaiku
 // This software is released under the MIT License.
 //
 // http://risaiku.net
@@ -11,6 +11,7 @@
 
 function DotMatrix(id) {
 	this.target = document.getElementById(id);
+	while (this.target.firstChild) this.target.removeChild(this.target.firstChild);
 	this.CODE_SEG_TABLE = [];
 	this.CODE_SEG_TABLE[ 32] = [0x00, 0x00, 0x00, 0x00, 0x00]; // ' '(0x20)
 	this.CODE_SEG_TABLE[ 33] = [0x00, 0x07, 0x5F, 0x07, 0x00]; // '!'(0x21)
@@ -136,6 +137,10 @@ DotMatrix.prototype = {
 		this.digit    = this.__getOption(option, "digit");
 		this.colorOn  = this.__getOption(option, "colorOn");
 		this.colorOff = this.__getOption(option, "colorOff");
+
+		if (this.digit === -1) {
+			this.digit = value.length;
+		}
 
 		var segArray = this.__getSegArray(value.toString());
 		var charLen  = segArray.length;
@@ -300,8 +305,7 @@ DotMatrix.prototype = {
 
 	__getSegArray : function(value) {
 		var buf = [];
-		var len = this.digit > 0 ? this.digit : value.length;
-		for (var i = 0; i < len; i++) {
+		for (var i = 0; i < this.digit; i++) {
 			if (i < value.length) {
 				var code = this.__charToCode(value, i);
 				buf[i] = this.CODE_SEG_TABLE[code];
